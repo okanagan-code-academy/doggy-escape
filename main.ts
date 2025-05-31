@@ -51,131 +51,123 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     })
 })
+function level1 () {
+    scene.setBackgroundColor(8)
+    tiles.setCurrentTilemap(tilemap`level1`)
+    effects.bubbles.startScreenEffect()
+    for (let value3 of tiles.getTilesByType(assets.tile`chest`)) {
+        clamSprite = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . c c c c c c c c . . . . 
+            . . c c b b 3 b 3 3 b b c c . . 
+            . c 3 3 b 3 3 b 3 3 3 b 3 3 c . 
+            c d d b 3 3 b 3 3 b 3 3 b d d c 
+            f c c c d d c d d c d d c c c f 
+            f b 3 c c c b c c b c c c 3 b f 
+            . c b b 3 3 b 3 3 b 3 3 b b c . 
+            . . f f f f f f f f f f f f . . 
+            `, SpriteKind.Clam)
+        tiles.placeOnTile(clamSprite, value3)
+        clownFishSprite = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . 8 8 8 8 . . . . 
+            . . . . . . 8 8 4 4 4 4 8 . . . 
+            . . . . . 8 8 8 8 8 8 4 8 . . . 
+            . . . . 8 8 7 7 7 7 4 8 8 . . . 
+            . . . 8 7 4 7 7 7 7 7 6 8 . 8 8 
+            . . 8 7 7 7 6 7 7 7 7 4 6 8 7 8 
+            . 8 7 7 7 7 6 7 7 7 7 7 6 8 7 8 
+            8 7 7 7 7 7 6 7 7 7 7 7 6 7 7 f 
+            8 7 7 7 2 7 6 8 8 7 7 7 6 f 7 f 
+            8 7 7 7 7 7 6 7 7 f 7 7 4 f 7 f 
+            . 8 7 7 7 7 6 8 7 f 7 4 f f f f 
+            . . 8 8 7 4 7 7 f f 7 8 f 8 . . 
+            . . . . 8 8 7 7 7 7 8 4 b 8 . . 
+            . . . . . . 8 8 8 8 4 4 4 8 . . 
+            . . . . . . . . . . 8 8 8 . . . 
+            `, SpriteKind.Enemy)
+        tiles.placeOnTile(clownFishSprite, value3)
+        tiles.setTileAt(value3, assets.tile`transparency16`)
+        sprites.setDataSprite(clamSprite, "Ghost", clownFishSprite)
+    }
+    for (let value of tiles.getTilesByType(assets.tile`myTile9`)) {
+        crabSprite = sprites.create(img`
+            ........................................
+            ........................................
+            ........................................
+            ........................................
+            ........................................
+            ........................................
+            ........................................
+            ........ff.....................ff.......
+            .......f2f.ff...............ff.f2f......
+            ......fa2f.f2f.............f2f.f2af.....
+            ......fa2f.f2f.............f2f.f2af.....
+            ......fa2f.f2f.............f2f.f2af.....
+            ......fa2fff2f.............f2fff2af.....
+            ......fa22222f.............f22222af.....
+            ......fa22222f....fffff....f22222af.....
+            ......ffa222ff..ff22222ff..ff222aff.....
+            .......ffaaff..f222222222f..ffaaff......
+            ........ffff..f22f72227f22f..ffff.......
+            .........ff..f222ff222ff222f..ff........
+            .........faff222222222222222ffaf........
+            ..........faf111222fff222111faf.........
+            ...........fafd11111111111dfaf..........
+            ...........f2afd111111111dfa2f..........
+            ..........f2ffffdd11111ddffff2f.........
+            ..........2fff22ffdddddff22fff2.........
+            ..........2f22ff22fffff22ff22f2.........
+            ...........2f.22f.......f22.f2..........
+            ...........f.22f.........f22.f..........
+            .............2ff.........ff2............
+            ........................................
+            ........................................
+            ........................................
+            ........................................
+            ........................................
+            ........................................
+            ........................................
+            ........................................
+            ........................................
+            ........................................
+            ........................................
+            `, SpriteKind.Goal)
+        tiles.placeOnTile(crabSprite, value)
+        tiles.setTileAt(value, assets.tile`transparency16`)
+    }
+    totalGoldCollectibles = sprites.allOfKind(SpriteKind.Clam).length
+}
 function createLevel () {
     if (currentLevel == 0) {
-        scene.setBackgroundColor(8)
-        tiles.setCurrentTilemap(tilemap`level2`)
-        for (let value3 of tiles.getTilesByType(assets.tile`chest`)) {
-            chestSprite = sprites.create(img`
-                . . f f f f f f f f f f f f . . 
-                . f 4 a a a a a a a a a a 4 f . 
-                f 3 a a a a a a a a a a a a 3 f 
-                f 3 a a a a a a a a a a a a 3 f 
-                f 3 a a a a a a a a a a a a 3 f 
-                f 3 3 a a a a a a a a a a 3 3 f 
-                f 3 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                f 3 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                f f f f f f f 5 5 f f f f f f f 
-                1 f f f f f f c c f f f f f f 1 
-                1 1 1 1 1 1 f c c f 1 1 1 1 1 1 
-                f 3 3 3 3 3 1 f f 1 3 3 3 3 3 f 
-                f 3 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                f 1 3 3 3 3 3 3 3 3 3 3 3 3 1 f 
-                f f f f f f f f f f f f f f f f 
-                . f f . . . . . . . . . . f f . 
-                `, SpriteKind.Chest)
-            tiles.placeOnTile(chestSprite, value3)
-            ghostSprite = sprites.create(assets.image`ghost`, SpriteKind.Enemy)
-            tiles.placeOnTile(ghostSprite, value3)
-            tiles.setTileAt(value3, assets.tile`transparency16`)
-            sprites.setDataSprite(chestSprite, "Ghost", ghostSprite)
-        }
-        music.setVolume(10)
-        music.play(music.createSong(assets.song`AmazingSong`), music.PlaybackMode.LoopingInBackground)
+        level0()
     } else if (currentLevel == 1) {
-        scene.setBackgroundColor(8)
-        tiles.setCurrentTilemap(tilemap`level1`)
-        effects.bubbles.startScreenEffect()
-        for (let value3 of tiles.getTilesByType(assets.tile`chest`)) {
-            clamSprite = sprites.create(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . c c c c c c c c . . . . 
-                . . c c b b 3 b 3 3 b b c c . . 
-                . c 3 3 b 3 3 b 3 3 3 b 3 3 c . 
-                c d d b 3 3 b 3 3 b 3 3 b d d c 
-                f c c c d d c d d c d d c c c f 
-                f b 3 c c c b c c b c c c 3 b f 
-                . c b b 3 3 b 3 3 b 3 3 b b c . 
-                . . f f f f f f f f f f f f . . 
-                `, SpriteKind.Clam)
-            tiles.placeOnTile(clamSprite, value3)
-            clownFishSprite = sprites.create(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . 8 8 8 8 . . . . 
-                . . . . . . 8 8 4 4 4 4 8 . . . 
-                . . . . . 8 8 8 8 8 8 4 8 . . . 
-                . . . . 8 8 7 7 7 7 4 8 8 . . . 
-                . . . 8 7 4 7 7 7 7 7 6 8 . 8 8 
-                . . 8 7 7 7 6 7 7 7 7 4 6 8 7 8 
-                . 8 7 7 7 7 6 7 7 7 7 7 6 8 7 8 
-                8 7 7 7 7 7 6 7 7 7 7 7 6 7 7 f 
-                8 7 7 7 2 7 6 8 8 7 7 7 6 f 7 f 
-                8 7 7 7 7 7 6 7 7 f 7 7 4 f 7 f 
-                . 8 7 7 7 7 6 8 7 f 7 4 f f f f 
-                . . 8 8 7 4 7 7 f f 7 8 f 8 . . 
-                . . . . 8 8 7 7 7 7 8 4 b 8 . . 
-                . . . . . . 8 8 8 8 4 4 4 8 . . 
-                . . . . . . . . . . 8 8 8 . . . 
-                `, SpriteKind.Enemy)
-            tiles.placeOnTile(clownFishSprite, value3)
-            tiles.setTileAt(value3, assets.tile`transparency16`)
-            sprites.setDataSprite(clamSprite, "Ghost", clownFishSprite)
-        }
-        for (let value of tiles.getTilesByType(assets.tile`myTile9`)) {
-            crabSprite = sprites.create(img`
-                ........................................
-                ........................................
-                ........................................
-                ........................................
-                ........................................
-                ........................................
-                ........................................
-                ........ff.....................ff.......
-                .......f2f.ff...............ff.f2f......
-                ......fa2f.f2f.............f2f.f2af.....
-                ......fa2f.f2f.............f2f.f2af.....
-                ......fa2f.f2f.............f2f.f2af.....
-                ......fa2fff2f.............f2fff2af.....
-                ......fa22222f.............f22222af.....
-                ......fa22222f....fffff....f22222af.....
-                ......ffa222ff..ff22222ff..ff222aff.....
-                .......ffaaff..f222222222f..ffaaff......
-                ........ffff..f22f72227f22f..ffff.......
-                .........ff..f222ff222ff222f..ff........
-                .........faff222222222222222ffaf........
-                ..........faf111222fff222111faf.........
-                ...........fafd11111111111dfaf..........
-                ...........f2afd111111111dfa2f..........
-                ..........f2ffffdd11111ddffff2f.........
-                ..........2fff22ffdddddff22fff2.........
-                ..........2f22ff22fffff22ff22f2.........
-                ...........2f.22f.......f22.f2..........
-                ...........f.22f.........f22.f..........
-                .............2ff.........ff2............
-                ........................................
-                ........................................
-                ........................................
-                ........................................
-                ........................................
-                ........................................
-                ........................................
-                ........................................
-                ........................................
-                ........................................
-                ........................................
-                `, SpriteKind.Goal)
-            tiles.placeOnTile(crabSprite, value)
-            tiles.setTileAt(value, assets.tile`transparency16`)
-        }
-        totalGoldCollectibles = sprites.allOfKind(SpriteKind.Clam).length
+        level1()
+    } else if (currentLevel == 2) {
+        level2()
     }
+    createBonesAndLives()
+}
+scene.onOverlapTile(SpriteKind.Player, assets.tile`hazardTile`, function (sprite, location) {
+    info.changeScoreBy(-20)
+    tiles.placeOnRandomTile(sprite, assets.tile`myTile`)
+})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (canJump == true) {
+        canJump = false
+        dogSprite.setVelocity(0, -200)
+        music.setVolume(255)
+        music.play(music.createSoundEffect(WaveShape.Triangle, 200, 600, 255, 0, 150, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    }
+})
+function createBonesAndLives () {
     for (let index = 0; index < 3; index++) {
         heartSprite = sprites.create(img`
             . . . . . . . . . . . . . . . . 
@@ -267,18 +259,6 @@ function createLevel () {
         })
     }
 }
-scene.onOverlapTile(SpriteKind.Player, assets.tile`hazardTile`, function (sprite, location) {
-    info.changeScoreBy(-20)
-    tiles.placeOnRandomTile(sprite, assets.tile`myTile`)
-})
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (canJump == true) {
-        canJump = false
-        dogSprite.setVelocity(0, -200)
-        music.setVolume(255)
-        music.play(music.createSoundEffect(WaveShape.Triangle, 200, 600, 255, 0, 150, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-    }
-})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Chest, function (sprite, otherSprite) {
     otherSprite.setFlag(SpriteFlag.GhostThroughSprites, true)
     otherSprite.setImage(img`
@@ -441,10 +421,166 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Chest, function (sprite, otherSp
     goldDoggyBone.setPosition(otherSprite.x, otherSprite.y)
     goldDoggyBone.y += -25
 })
+function level2 () {
+    scene.setBackgroundImage(img`
+        3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333333333333333333333333333353333333333333333333333333333333333333333333333333333333333333333333333333333333533333333333
+        3333333333333333333333353333333333333333333333333333333333333333333555333333333333333333333333333333333533333333333333333333333333333333333333333335553333333333
+        3333333333333333333333555333333333333333333333333333333333333333335555533333333333333333333333333333335553333333333333333333333333333333333333333355555333333333
+        3333333333333333333333353333333333333333333333333333333333333333333555333333333333333333333333333333333533333333333333333333333333333333333333333335553333333333
+        3333333333333333333333333333333333333333333333333111333333333333333535333333333333333333333333333333333333333333333333333333333331113333333333333335353333333333
+        33333d11d3333333333333333333333333333333333333331111133333333333333333333333333333333d11d33333333333333333333333333333333333333311111333333333333333333333333333
+        33331111113333333333333333333333333333333331133111111d3333333333333333333333333333331111113333333333333333333333333333333331133111111d33333333333333333333333333
+        3331111111d33333333333333333333333333333331111d1111111133333333333333333333333333331111111d33333333333333333333333333333331111d111111113333333333333333333333333
+        33311111111d11333333333333333333333333333d1111111111111d33333333333333333333333333311111111d11333333333333333333333333333d1111111111111d333333333333333333333333
+        331111111111111333333333333333333333333d11111111111111111d3333333333333333333333331111111111111333333333333333333333333d11111111111111111d3333333333333333333333
+        1d1111111111111d31113333333333333333333333333333333333333333333366633333333333311d1111111111111d3111333333333333333333333333333333333333333333336663333333333331
+        1111111111111111111113333333333333333333333333333333333333333336776633333333331111111111111111111111133333333333333333333333333333333333333333367766333333333311
+        1111111111166666111113333333333333533333333333333333333333333366777633333333331111111111111666661111133333333333335333333333333333333333333333667776333333333311
+        111111111166777661111111d333333335553333333333333333333333333367777663333333d111111111111166777661111111d333333335553333333333333333333333333367777663333333d111
+        3333333336677777663333333333333355555333333333333333333333333367777763333333333333333333366777776633333333333333555553333333333333333333333333677777633333333333
+        3333333336777777763333333333333335553333333333333333333333333367777763333333333333333333367777777633333333333333355533333333333333333333333333677777633333333333
+        3333333366777777766333333333333335353333333333333333333333333367777763333333333333333333667777777663333333333333353533333333333333333333333333677777633333333333
+        3333333367777777776333333333333333333333333333333335333333333367777763333333333333333333677777777763333333333333333333333333333333353333333333677777633333333333
+        3333333367777777776333366333333333333333333333333355533333333367777763333333333333333333677777777763333663333333333333333333333333555333333333677777633333333333
+        3333333367777777776333677633333333333333333333333335333336633367777763333333333333333333677777777763336776333333333333333333333333353333366333677777633333333333
+        3333333367777777776336677663333333333333333333333333333367763367777763333333333333333333677777777763366776633333333333333333333333333333677633677777633333333333
+        3333333367777777776336777763333333333333333333333333333367763367777763333333333333333333677777777763367777633333333333333333333333333333677633677777633333333333
+        3333333367777777776336777763333333333333333333333333333367763367777763333333333333333333677777777763367777633333333333333333333333333333677633677777633333333333
+        6666333367777777776666777763333333333666666333333333333367763367777763333333333666663333677777777766667777633333333336666663333333333333677633677777633333333336
+        7776633367777777777777777763333333336666666633333333333367763367777763336633336677766333677777777777777777633333333366666666333333333333677633677777633366333366
+        7777633367777777777777777633333333366666666663333333333367763367777763367663366777776333677777777777777776333333333666666666633333333333677633677777633676633667
+        7777763367777777777777776633333333366666666663333333333367763367777763367763367777777633677777777777777766333333333666666666633333333333677633677777633677633677
+        7777763367777777776666666333333333666666666663333333333367763367777763367763367777777633677777777766666663333333336666666666633333333333677633677777633677633677
+        7777776367777777776333333333333333666666666663333333333367776667777763677763367777777763677777777763333333333333336666666666633333333333677766677777636777633677
+        7777776367777777776333333333333333666666666666333333333366777777777766677766667777777763677777777763333333333333336666666666663333333333667777777777666777666677
+        7777776367777777776333666666666333666666666666333333333336677777777776677666677777777763677777777763336666666663336666666666663333333333366777777777766776666777
+        7777776667777777776366677777776663666666666666333333333333666677777777777666677777777766677777777763666777777766636666666666663333333333336666777777777776666777
+        7777776667777777776667777777777766666666666666333366666633333677777777777666677777777766677777777766677777777777666666666666663333666666333336777777777776666777
+        7777776667777777776677777777777776666666666666366677777666333677777777776666677777777766677777777766777777777777766666666666663666777776663336777777777766666777
+        7777777667777777776777777777777777666666666666667777777776633677777766666666677777777776677777777767777777777777776666666666666677777777766336777777666666666777
+        7777777667777777766777777777777777666666666666677777777777663677777766666666677777777776677777777667777777777777776666666666666777777777776636777777666666666777
+        7777777667777777767777777777777777766666666666777777777777766677777766666666677777777776677777777677777777777777777666666666667777777777777666777777666666666777
+        7777777667777777667777777777777777766666666666777777777777766677777766666666677777777776677777776677777777777777777666666666667777777777777666777777666666666777
+        7777777667777777677777777777777777776666666666777777777777766677777766666666677777777776677777776777777777777777777766666666667777777777777666777777666666666777
+        7777777667777733333333777777777777776666666666777777773333333377777766666666677777777776677777333333337777777777777766666666667777777733333333777777666666666777
+        777777766777333dddddd3333777777777776666666666777777333dddddd3333777666666666777777777766777333dddddd3333777777777776666666666777777333dddddd3333777666666666777
+        7777777666333ddddddddddd33377777777766666666667777333ddddddddddd33376666666667777777777666333ddddddddddd33377777777766666666667777333ddddddddddd3337666666666777
+        77777776633ddddddddddddddd3337777777666666666677733ddddddddddddddd3336666666677777777776633ddddddddddddddd3337777777666666666677733ddddddddddddddd33366666666777
+        7777777333dddddddddddddddddd3333777766666666666333dddddddddddddddddd3333666667777777777333dddddddddddddddddd3333777766666666666333dddddddddddddddddd333366666777
+        33777333ddddddddddddddddddddddd33333333333666333ddddddddddddddddddddddd33333333333777333ddddddddddddddddddddddd33333333333666333ddddddddddddddddddddddd333333333
+        d33333ddddddddddddddddddddddddddd33dddddd33333ddddddddddddddddddddddddddd33dddddd33333ddddddddddddddddddddddddddd33dddddd33333ddddddddddddddddddddddddddd33ddddd
+        ddd33ddddddddddddddddddddddddd333dddddddddd33ddddddddddddddddddddddddd333dddddddddd33ddddddddddddddddddddddddd333dddddddddd33ddddddddddddddddddddddddd333ddddddd
+        ddddd33ddddddddddddddddddddd33ddddddddddddddd33ddddddddddddddddddddd33ddddddddddddddd33ddddddddddddddddddddd33ddddddddddddddd33ddddddddddddddddddddd33dddddddddd
+        ddddddd333dddddddddddddddd33ddddddddddddddddddd333dddddddddddddddd33ddddddddddddddddddd333dddddddddddddddd33ddddddddddddddddddd333dddddddddddddddd33dddddddddddd
+        dddddddddd333ddddddddddd33dddddddddddddddddddddddd333ddddddddddd33dddddddddddddddddddddddd333ddddddddddd33dddddddddddddddddddddddd333ddddddddddd33dddddddddddddd
+        dddddddddddd333ddddddd33dddddddddddddddddddddddddddd333ddddddd33dddddddddddddddddddddddddddd333ddddddd33dddddddddddddddddddddddddddd333ddddddd33dddddddddddddddd
+        dddddddddddddd333ddd33dddddddddddddddddddddddddddddddd333ddd33dddddddddddddddddddddddddddddddd333ddd33dddddddddddddddddddddddddddddddd333ddd33dddddddddddddddddd
+        dddddddddddddddd3333dddddddddddddddddddddddddddddddddddd3333dddddddddddddddddddddddddddddddddddd3333dddddddddddddddddddddddddddddddddddd3333dddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        `)
+    tiles.setCurrentTilemap(tilemap`level3`)
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Collectible, function (sprite, otherSprite) {
     info.changeScoreBy(50)
     sprites.destroy(otherSprite)
 })
+function level0 () {
+    scene.setBackgroundColor(8)
+    tiles.setCurrentTilemap(tilemap`level2`)
+    for (let value3 of tiles.getTilesByType(assets.tile`chest`)) {
+        chestSprite = sprites.create(img`
+            . . f f f f f f f f f f f f . . 
+            . f 4 a a a a a a a a a a 4 f . 
+            f 3 a a a a a a a a a a a a 3 f 
+            f 3 a a a a a a a a a a a a 3 f 
+            f 3 a a a a a a a a a a a a 3 f 
+            f 3 3 a a a a a a a a a a 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f f f f f f f 5 5 f f f f f f f 
+            1 f f f f f f c c f f f f f f 1 
+            1 1 1 1 1 1 f c c f 1 1 1 1 1 1 
+            f 3 3 3 3 3 1 f f 1 3 3 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 1 3 3 3 3 3 3 3 3 3 3 3 3 1 f 
+            f f f f f f f f f f f f f f f f 
+            . f f . . . . . . . . . . f f . 
+            `, SpriteKind.Chest)
+        tiles.placeOnTile(chestSprite, value3)
+        ghostSprite = sprites.create(assets.image`ghost`, SpriteKind.Enemy)
+        tiles.placeOnTile(ghostSprite, value3)
+        tiles.setTileAt(value3, assets.tile`transparency16`)
+        sprites.setDataSprite(chestSprite, "Ghost", ghostSprite)
+    }
+    music.setVolume(10)
+    music.play(music.createSong(assets.song`AmazingSong`), music.PlaybackMode.LoopingInBackground)
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Life, function (sprite, otherSprite) {
     info.changeLifeBy(1)
     sprites.destroy(otherSprite)
@@ -458,6 +594,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.GoldCollectible, function (sprit
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Goal, function (sprite, otherSprite) {
     if (totalGoldCollectibles == 0) {
         game.gameOver(true)
+    } else {
+        crabSprite.sayText("You need to find " + totalGoldCollectibles + " more pearls!", 500, false)
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Clam, function (sprite, otherSprite) {
@@ -814,6 +952,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 })
 let mrVenomousSprite: Sprite = null
 let pearl: Sprite = null
+let ghostSprite: Sprite = null
+let chestSprite: Sprite = null
 let goldDoggyBone: Sprite = null
 let dustSprite: Sprite = null
 let fvCatSprite: Sprite = null
@@ -823,13 +963,11 @@ let totalGoldCollectibles = 0
 let crabSprite: Sprite = null
 let clownFishSprite: Sprite = null
 let clamSprite: Sprite = null
-let ghostSprite: Sprite = null
-let chestSprite: Sprite = null
 let dogSprite: Sprite = null
 let toySprite: Sprite = null
 let canJump = false
 let currentLevel = 0
-currentLevel = 1
+currentLevel = 2
 info.setScore(0)
 info.setLife(5)
 canJump = false
